@@ -3,6 +3,8 @@ import pandas as pd
 
 
 class NewExcelFile:
+    """ExcelFile class to create a new excel with multiple sheets."""
+
     def __init__(self) -> None:
         """Initialize the ExcelFile"""
         self.sheets: dict[str, pd.DataFrame] = dict()
