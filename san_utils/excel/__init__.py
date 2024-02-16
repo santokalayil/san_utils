@@ -6,7 +6,7 @@ class NewExcelFile:
     def __init__(self) -> None:
         """Initialize the ExcelFile"""
         self.sheets: dict[str, pd.DataFrame] = dict()
-        self.index_info: dict[str, str] = dict()
+        self.index_info: dict[str, bool] = dict()
 
     def add_sheet(
         self, sheet_name: str, dataframe: pd.DataFrame, replace=True, index=True
@@ -23,8 +23,11 @@ class NewExcelFile:
                     "Unable to add the new file since the sheet_name already exists"
                 )
 
-        self.sheets[sheet_name] = dataframe
+        if not isinstance(index, bool):
+            raise ValueError("The index value should be True or False")
+
         self.index_info[sheet_name] = index
+        self.sheets[sheet_name] = dataframe
 
     def view_sheet(self, sheet_name: str) -> pd.DataFrame:
         """view the sheet as dataframe if sheet name exists
